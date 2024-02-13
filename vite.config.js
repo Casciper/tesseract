@@ -18,6 +18,13 @@ const config = defineConfig({
         emptyOutDir: true,
     },
     plugins: [vuePlugin()],
+    // css: {
+    //     preprocessorOptions: {
+    //         scss: {
+    //             additionalData: `@import "./src/styles/app.scss";`
+    //         }
+    //     }
+    // }
 });
 
 module.exports = config;

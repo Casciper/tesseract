@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+}
+html{
+  height: calc(100vh - 20px);
+  padding: 10px;
+}
+body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #edeef0;
+  #app{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    .content{
+      border-radius: 20px;
+      width: 100%;
+      height: calc(100% - 40px);
+      padding: 20px;
+      margin: 0;
+      background: #fff;
+      //overflow: auto;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+  }
+}

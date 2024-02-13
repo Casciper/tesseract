@@ -7,15 +7,15 @@ const routes = [
         component: () => import("./components/pages/Home.vue"),
     },
     {
-        path: "/news",
-        name: "news",
-        component: () => import("./components/pages/News.vue"),
+        path: "/user",
+        name: "user",
+        component: () => import("./components/pages/User.vue"),
     },
 
     {
-        path: "/characters",
-        name: "characters",
-        component: () => import("./components/pages/Characters.vue"),
+        path: "/cars",
+        name: "cars",
+        component: () => import("./components/pages/Cars.vue"),
     },
 ];
 
