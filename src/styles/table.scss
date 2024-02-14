@@ -2,6 +2,8 @@
   overflow-x: auto;
   .table{
     width: 100%;
+    min-width: 500px;
+    overflow: auto;
     border-collapse: collapse;
     td,th{
       padding: 20px 5px;

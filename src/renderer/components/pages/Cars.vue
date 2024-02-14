@@ -58,7 +58,7 @@
         </td>
         <td>
           <div v-if="!car.saved">
-            <a href="#">Заполнить</a>
+            <router-link :to="{ name: 'car-edit', params: { id: car.id }}">Заполнить</router-link>
           </div>
         </td>
       </tr>

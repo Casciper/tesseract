@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1>Настройки профиля</h1>
+    <h1>Список пользователей</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'User',
+  name: 'Users',
   data() {
     return {}
   },

@@ -5,17 +5,24 @@
     </div>
     <router-link :to="{ name: 'home' }" class="sidebar-link">Главная</router-link>
     <router-link :to="{ name: 'cars' }" class="sidebar-link">Машины</router-link>
-    <router-link :to="{ name: 'user' }" class="sidebar-link">Профиль</router-link>
+    <router-link :to="{ name: 'users' }" class="sidebar-link">Менеджеры</router-link>
+    <router-link :to="{ name: 'profile' }" class="user-profile">Аккаунт</router-link>
   </div>
-  <div class="content">
-    <span @click="close" class="close-btn">123</span>
-    <router-view v-slot="{ Component, route }">
-      <transition name="fade" mode="out-in">
-        <div :key="route.name">
-          <component :is="Component"></component>
-        </div>
-      </transition>
-    </router-view>
+  <div class="content-container">
+    <div class="content">
+      <div class="history-container">
+        <span @click="" class="history-btn">{{ arrowLeft }}</span>
+        <span @click="" class="history-btn">{{ arrowRight }}</span>
+      </div>
+      <span @click="close" class="close-btn">{{ arrowLeft }}</span>
+      <router-view v-slot="{ Component, route }">
+        <transition name="fade" mode="out-in">
+          <div :key="route.name">
+            <component :is="Component"></component>
+          </div>
+        </transition>
+      </router-view>
+    </div>
   </div>
 </template>
 
@@ -23,10 +30,15 @@
 export default {
   name: 'App',
   data() {
-    return {}
+    return {
+      arrowLeft: '<=',
+      arrowRight: '=>',
+    }
   },
   methods: {
     close() {
+      let node = document.querySelector('.sidebar')
+      node.classList.contains('close') ? this.closeBtnTitle = '<=' : this.closeBtnTitle = '=>'
       document.querySelector('.sidebar').classList.toggle('close')
     }
   }
