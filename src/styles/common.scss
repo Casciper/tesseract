@@ -2,8 +2,12 @@
   margin: 0;
 }
 html{
-  height: calc(100vh - 20px);
+  height: 100vh;
   padding: 10px;
+  font-size: 100%;
+  font-size-adjust: 100%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 body{
   margin: 0;
