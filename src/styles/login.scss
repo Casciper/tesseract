@@ -31,27 +31,6 @@ body {
   margin: 0 auto;
 }
 
-.ion {
-  &-logo-apple {
-    font-size: 1.65rem;
-    line-height: inherit;
-    margin-right: 0.5rem;
-    color: var(--color-black);
-  }
-  &-logo-google {
-    font-size: 1.65rem;
-    line-height: inherit;
-    margin-right: 0.5rem;
-    color: var(--color-red);
-  }
-  &-logo-facebook {
-    font-size: 1.65rem;
-    line-height: inherit;
-    margin-right: 0.5rem;
-    color: var(--color-blue);
-  }
-}
-
 .text {
   font-family: inherit;
   line-height: inherit;
@@ -82,7 +61,6 @@ body {
   }
 }
 
-// Main
 .main {
   .wrapper {
     max-width: 28rem;
@@ -148,32 +126,6 @@ body {
         text-rendering: optimizeLegibility;
         margin-right: auto;
         margin-left: auto;
-      }
-    }
-
-    .striped {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      margin: 1rem 0;
-
-      &-line {
-        flex: auto;
-        flex-basis: auto;
-        border: none;
-        outline: none;
-        height: 2px;
-        background: var(--color-grayish);
-      }
-
-      &-text {
-        font-family: inherit;
-        font-size: 1rem;
-        font-weight: 500;
-        line-height: inherit;
-        color: var(--color-black);
-        margin: 0 1rem;
       }
     }
 
