@@ -15,9 +15,14 @@ const setUserInfo = (state, data ) => {
     state.user.name = data.name
 }
 
+const setNotification = (state, data) => {
+    state.notification = data
+}
+
 export default {
     toggleLoading,
     changeToken,
     changeAuthenticated,
-    setUserInfo
+    setUserInfo,
+    setNotification
 }

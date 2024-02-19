@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const requestUrl = 'http://localhost:1031';
 
 const setHeaders = () => {
@@ -9,7 +10,13 @@ const removeHeaders = () => {
     axios.defaults.headers.common['Authorization'] = ''
 }
 
-const login = ({ commit, dispatch }, data) => {
+const clearNotification = ({commit, dispatch}) => {
+    setTimeout(() => {
+        commit('setNotification', null);
+    }, 2000);
+}
+
+const login = ({commit, dispatch}, data) => {
     commit('toggleLoading')
     return axios({
         method: 'POST',
@@ -45,7 +52,7 @@ const login = ({ commit, dispatch }, data) => {
         });
 }
 
-const logout = ({ commit, dispatch }) => {
+const logout = ({commit, dispatch}) => {
     commit('toggleLoading')
     return axios({
         method: 'POST',
@@ -79,5 +86,6 @@ const logout = ({ commit, dispatch }) => {
 
 export default {
     login,
-    logout
+    logout,
+    clearNotification
 }

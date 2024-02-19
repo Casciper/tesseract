@@ -35,7 +35,7 @@
       </thead>
 
       <tbody>
-      <tr v-for="car in cars" :key="car.id" :class="!car.saved ? 'new' : ''">
+      <tr v-for="car in cars" :key="car.id" :class="!car.isSaved ? 'new' : ''">
         <td>
           <div>
             {{ car.id }}
@@ -57,8 +57,8 @@
           </div>
         </td>
         <td>
-          <div v-if="!car.saved">
-            <router-link @click="storeCar(car.id)" :to="{ name: 'car-edit', params: { id: car.id}}">Заполнить</router-link>
+          <div>
+            <router-link @click="storeCar(car.id)" :to="{ name: 'car-edit', params: { id: car.id}}">{{ car.isSaved ? 'Посмотреть' : 'Заполнить'}}</router-link>
           </div>
         </td>
       </tr>

@@ -50,6 +50,16 @@ body{
       }
       @keyframes l3 {to{transform: rotate(1turn)}}
     }
+    .notification{
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      z-index: 99;
+      border: 1px solid green;
+      padding: 30px;
+      border-radius: 20px;
+      background: #9cd09c;
+    }
     .content-container{
       border-radius: 20px;
       width: 100%;

@@ -12,18 +12,20 @@
       <input required v-model="user.email"/>
     </label>
     <label>
+      <span>Пароль</span>
+      <input required v-model="user.password" />
+    </label>
+    <label>
       <span>Роль</span>
       <input required v-model="user.role" />
     </label>
-    <label>
-      <span>Дата создания</span>
-      <input required v-model="user.date" />
-    </label>
-    <button>Сохранить</button>
+    <button @click.prevent="createUser">Сохранить</button>
   </form>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: 'userCreate',
   data() {
@@ -31,6 +33,15 @@ export default {
       user: {},
     }
   },
+  methods: {
+    createUser() {
+      axios.post('http://localhost:1031/api/create-user', this.user)
+          .then(res => {
+            console.log(res)
+            this.$router.push({ name: 'users'})
+          })
+    }
+  }
 }
 </script>
 

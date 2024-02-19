@@ -15,28 +15,41 @@
       <span>Роль</span>
       <input required v-model="user.role" />
     </label>
-    <label>
-      <span>Дата создания</span>
-      <input required v-model="user.date" />
-    </label>
-    <button>Сохранить</button>
+    <button @click.prevent="updateUser">Сохранить</button>
+    <button @click.prevent="removeUser">Удалить</button>
   </form>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: 'userEdit',
   data() {
     return {
-      user: {
-        id: 1,
-        name: 'Иван',
-        email: '2zKpR@example.com',
-        role: 'admin',
-        date: '28-03-2022 23:00',
-      },
     }
   },
+  computed: {
+    user() {
+      return this.$store.state.storedUser
+    }
+  },
+  methods: {
+    updateUser() {
+      axios.post('http://localhost:1031/api/update-user', this.user)
+          .then(res => {
+            console.log(res)
+            this.$router.push({ name: 'users'})
+          })
+    },
+    removeUser() {
+      axios.post('http://localhost:1031/api/remove-user', this.user)
+          .then(res => {
+            console.log(res)
+            this.$router.push({ name: 'users'})
+          })
+    }
+  }
 }
 </script>
 

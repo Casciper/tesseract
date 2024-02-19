@@ -32,17 +32,14 @@ export default {
   name: 'Login',
   data() {
     return {
-      user: {
-        email: '',
-        password: ''
-      },
+      user: {},
       v$: useVuelidate(),
     }
   },
   methods: {
     login() {
-      /*this.v$.$validate();
-      if (this.v$.$error) {
+      this.v$.$validate();
+      /*if (this.v$.$error) {
         console.log(this.v$);
       } else {*/
         // this.$store.dispatch('login', { email: this.user.email, password: this.user.password });

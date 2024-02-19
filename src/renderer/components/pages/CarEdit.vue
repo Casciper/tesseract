@@ -5,43 +5,82 @@
     </div>
     <label>
       <span>Номер</span>
-      <input required v-model="car.number"/>
+      <input disabled required v-model="car.number"/>
     </label>
     <label>
       <span>Дата</span>
-      <input required v-model="car.date"/>
+      <input disabled required v-model="car.date"/>
     </label>
     <label>
       <span>Время</span>
-      <input required v-model="car.time" />
+      <input disabled required v-model="car.time"/>
     </label>
     <label>
       <span>Марка</span>
-      <input required v-model="car.brand" />
+      <input :disabled="car.isSaved" required v-model="car.brand"/>
+      <span class="input-error-text">{{ v$ && v$.car.brand.$errors[0]?.$message }}</span>
     </label>
     <label>
       <span>Услуга</span>
-      <input required v-model="car.service" />
+      <input :disabled="car.isSaved" required v-model="car.service"/>
+      <span class="input-error-text">{{ v$ && v$.car.service.$errors[0]?.$message }}</span>
+    </label>
+    <label>
+      <span>Скидка</span>
+      <input :disabled="car.isSaved" required v-model="car.salary"/>
+      <span class="input-error-text">{{ v$ && v$.car.salary.$errors[0]?.$message }}</span>
     </label>
     <label>
       <span>Оплата</span>
-      <input required v-model="car.price" />
+      <input :disabled="car.isSaved" required v-model="car.payment"/>
+      <span class="input-error-text">{{ v$ && v$.car.payment.$errors[0]?.$message }}</span>
     </label>
-    <button>Сохранить</button>
+    <label>
+      <span>Коммент</span>
+      <textarea required v-model="car.comment"/>
+    </label>
+    <button @click.prevent="setCar">Сохранить</button>
   </form>
 </template>
 
 <script>
+import axios from "axios";
+import {useVuelidate} from '@vuelidate/core';
+import {required} from '@vuelidate/validators';
+
 export default {
   name: 'CarsEdit',
   data() {
     return {
-      car: {},
+      v$: useVuelidate(),
     }
   },
   computed: {
     car() {
       return this.$store.state.storedCar
+    }
+  },
+  methods: {
+    setCar() {
+      this.v$.$validate();
+      if (this.v$.$error) {
+        console.log(this.v$);
+      } else {
+        axios.post('http://localhost:1031/api/update-car', this.car)
+            .then(res => {
+              this.$router.push({name: 'cars'})
+              this.$store.commit('setNotification', 'Заявка обновлена')
+              this.$store.dispatch('clearNotification')
+            })
+      }
+    }
+  },
+  validations: {
+    car: {
+      brand: {required},
+      service: {required},
+      salary: {required},
+      payment: {required},
     }
   },
 }

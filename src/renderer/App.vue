@@ -1,5 +1,8 @@
 <template>
   <transition name="fade" mode="out-in">
+    <div class="notification" v-if="notification">{{ notification }}</div>
+  </transition>
+  <transition name="fade" mode="out-in">
     <div class="loader" v-if="loading"><div class="item"></div></div>
   </transition>
   <div v-if="isAuthenticated" class="sidebar">
@@ -61,6 +64,10 @@ export default {
     },
     loading() {
       return this.$store.state.loading
+    },
+    notification() {
+      console.log(this.$store.state.notification)
+      return this.$store.state.notification
     }
   },
   methods: {

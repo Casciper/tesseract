@@ -16,28 +16,39 @@
     <span>Роль</span>
     <input required v-model="user.role" />
   </label>
-  <label>
-    <span>Дата создания</span>
-    <input required v-model="user.date" />
-  </label>
-  <button>Сохранить</button>
+  <button @click.prevent="updateUser">Сохранить</button>
   </form>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: 'Profile',
   data() {
     return {
-      user: {
-        id: 1,
-        name: 'Иван',
-        email: '2zKpR@example.com',
-        role: 'admin',
-        date: '28-03-2022 23:00',
-      },
+      user: {}
     }
   },
+  mounted() {
+    this.getUser()
+  },
+  methods: {
+    getUser() {
+      axios.get('http://localhost:1031/api/get-user')
+          .then(res => {
+            this.user = res.data
+          })
+    },
+    updateUser() {
+      axios.post('http://localhost:1031/api/update-user', this.user)
+          .then(res => {
+            this.$router.push({ name: 'profile'})
+            this.$store.commit('setNotification', 'Профиль обновлён')
+            this.$store.dispatch('clearNotification')
+          })
+    },
+  }
 }
 </script>
 
