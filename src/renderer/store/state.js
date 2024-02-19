@@ -4,6 +4,7 @@ export const state = {
         name: '',
         email: '',
     },
+    storedCar: null,
     isAuthenticated: false,
     loading: false,
     token: '',

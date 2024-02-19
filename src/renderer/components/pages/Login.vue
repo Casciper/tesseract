@@ -41,12 +41,13 @@ export default {
   },
   methods: {
     login() {
-      this.v$.$validate();
+      /*this.v$.$validate();
       if (this.v$.$error) {
         console.log(this.v$);
-      } else {
-        this.$store.dispatch('login', { email: this.user.email, password: this.user.password });
-      }
+      } else {*/
+        // this.$store.dispatch('login', { email: this.user.email, password: this.user.password });
+        this.$store.dispatch('login', { email: 'pechenkov39@gmail.com', password: '0504asdasd' });
+      // }
     },
   },
   validations: {

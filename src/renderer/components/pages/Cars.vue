@@ -3,7 +3,7 @@
     <h1>Список машин</h1>
   </div>
 
-  <div class="table-container">
+  <div class="table-container" v-if="cars">
     <table class="table">
       <thead>
       <tr>
@@ -58,7 +58,7 @@
         </td>
         <td>
           <div v-if="!car.saved">
-            <router-link :to="{ name: 'car-edit', params: { id: car.id }}">Заполнить</router-link>
+            <router-link @click="storeCar(car.id)" :to="{ name: 'car-edit', params: { id: car.id}}">Заполнить</router-link>
           </div>
         </td>
       </tr>
@@ -68,47 +68,27 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: 'Cars',
   data() {
     return {
-      cars: [
-        {
-          id: 1,
-          date: '28-03-2022',
-          time: '23:00',
-          number: 'z768axc',
-          saved: false
-        },
-        {
-          id: 2,
-          date: '28-03-2022',
-          time: '23:00',
-          number: 'z768axc',
-          saved: false
-        },
-        {
-          id: 3,
-          date: '28-03-2022',
-          time: '23:00',
-          number: 'z768axc',
-          saved: true
-        },
-        {
-          id: 4,
-          date: '28-03-2022',
-          time: '23:00',
-          number: 'z768axc',
-          saved: true
-        },
-        {
-          id: 5,
-          date: '28-03-2022',
-          time: '23:00',
-          number: 'z768axc',
-          saved: true
-        },
-      ]
+      cars: null,
+    }
+  },
+  mounted() {
+    this.getCars()
+  },
+  methods: {
+    getCars() {
+      axios.get('http://localhost:1031/api/get-cars')
+        .then(response => {
+          this.cars = response.data.cars
+        })
+    },
+    storeCar(id) {
+      this.$store.state.storedCar = this.cars.find(car => car.id === id);
     }
   },
 }

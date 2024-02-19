@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form v-if="car">
     <div>
       <h1>Редактировать машину</h1>
     </div>
@@ -36,13 +36,12 @@ export default {
   name: 'CarsEdit',
   data() {
     return {
-      car: {
-        id: 2,
-        date: '28-03-2022',
-        time: '23:00',
-        number: 'z768axc',
-        saved: false
-      },
+      car: {},
+    }
+  },
+  computed: {
+    car() {
+      return this.$store.state.storedCar
     }
   },
 }
