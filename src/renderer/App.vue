@@ -1,5 +1,8 @@
 <template>
-  <div v-if="user.isAuth" class="sidebar">
+  <transition name="fade" mode="out-in">
+    <div class="loader" v-if="loading"><div class="item"></div></div>
+  </transition>
+  <div v-if="isAuthenticated" class="sidebar">
     <div class="logo">
       AutoCatcher
     </div>
@@ -8,11 +11,16 @@
     <router-link :to="{ name: 'users' }" class="sidebar-link">Работники</router-link>
     <router-link :to="{ name: 'profile' }" class="user-profile">Аккаунт</router-link>
   </div>
-  <div v-if="user.isAuth" class="content-container">
+  <div v-if="isAuthenticated" class="content-container">
     <div class="content">
       <div class="history-container">
-        <button @click="goBack" :class="{ disabled: disabledBack }" :disabled="disabledBack">Назад</button>
-        <button @click="goForward" :class="{ disabled: disabledForward }" :disabled="disabledForward">Вперед</button>
+        <div class="history">
+          <button @click="goBack" :class="{ disabled: disabledBack }" :disabled="disabledBack">Назад</button>
+          <button @click="goForward" :class="{ disabled: disabledForward }" :disabled="disabledForward">Вперед</button>
+        </div>
+        <div class="logout">
+          <button @click="logout" class="close-btn">Выйти</button>
+        </div>
       </div>
       <button @click="close" class="close-btn">{{ closeBtnTitle }}</button>
       <router-view v-slot="{ Component, route }">
@@ -25,13 +33,12 @@
     </div>
   </div>
   <div v-else>
-    <Login @authenticated="handleAuthStatus"/>
+    <Login/>
   </div>
 </template>
 
 <script>
 import Login from "./components/pages/Login.vue";
-
 export default {
   name: 'App',
   components: {
@@ -43,13 +50,18 @@ export default {
       arrowLeft: '<=',
       disabledBack: false,
       disabledForward: false,
-      user: {
-        isAuth: false
-      }
     }
   },
   mounted() {
     this.checkHistory()
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.state.isAuthenticated
+    },
+    loading() {
+      return this.$store.state.loading
+    }
   },
   methods: {
     close() {
@@ -81,12 +93,8 @@ export default {
         this.checkHistory()
       }, 300)
     },
-    handleAuthStatus(isAuthenticated) {
-      if (isAuthenticated) {
-        this.user.isAuth = true;
-      } else {
-        this.user.isAuth = false;
-      }
+    logout() {
+      this.$store.dispatch('logout')
     }
   },
   watch: {

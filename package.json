@@ -17,9 +17,9 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.4.1",
+    "bootstrap": "^5.2.3",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
-    "bootstrap": "^5.2.3",
     "electron": "^27.1.0",
     "electron-builder": "^24.2.1",
     "sass": "^1.70.0",
@@ -27,8 +27,13 @@
     "vite": "^4.5.0"
   },
   "dependencies": {
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
+    "axios": "^1.6.7",
     "vue": "^3.3.8",
     "vue-good-table-next": "^0.2.1",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vuelidate": "^0.7.7",
+    "vuex": "^4.1.0"
   }
 }
