@@ -3,7 +3,7 @@
     <div class="notification" v-if="notification.text" :class="notification.type">{{ notification.text }}</div>
   </transition>
   <transition name="fade" mode="out-in">
-    <div class="loader" v-if="loading"><div class="item"></div></div>
+    <div class="loader main-loader" v-if="loading"><div class="item"></div></div>
   </transition>
   <div v-if="isAuthenticated" class="sidebar">
     <div class="logo">

@@ -3,8 +3,15 @@
     <h1>Список машин</h1>
   </div>
 
-  <div class="table-container" v-if="cars">
-    <table class="table">
+  <div class="table-container">
+
+    <transition name="fade" mode="out-in">
+      <div v-if="loading" class="loader content-side">
+        <div class="item"></div>
+      </div>
+    </transition>
+
+    <table class="table" v-if="cars">
       <thead>
       <tr>
         <th>
@@ -34,7 +41,7 @@
       </tr>
       </thead>
 
-      <tbody>
+      <tbody v-if="cars">
       <tr v-for="car in cars" :key="car.id" :class="!car.isSaved ? 'new' : ''">
         <td>
           <div>
@@ -76,6 +83,7 @@ export default {
   data() {
     return {
       cars: null,
+      loading: true
     }
   },
   mounted() {
@@ -87,6 +95,9 @@ export default {
         .then(response => {
           this.cars = response.data.cars
         })
+          .finally(() => {
+            this.loading = false
+          })
     },
     storeCar(id) {
       this.$store.state.storedCar = this.cars.find(car => car.id === id);

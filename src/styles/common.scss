@@ -32,6 +32,9 @@ body{
       justify-content: center;
       align-items: center;
       background: #fff;
+      &.main-loader{
+        z-index: 999999;
+      }
       /* HTML: <div class="loader"></div> */
       .item {
         width: 50px;
