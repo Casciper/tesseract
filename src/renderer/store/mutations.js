@@ -16,7 +16,8 @@ const setUserInfo = (state, data ) => {
 }
 
 const setNotification = (state, data) => {
-    state.notification = data
+    state.notification.text = data.text
+    state.notification.type = data.type
 }
 
 export default {

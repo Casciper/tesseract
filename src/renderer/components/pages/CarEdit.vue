@@ -45,6 +45,7 @@
 
 <script>
 import axios from "axios";
+import { requestUrl } from '../../store/actions';
 import {useVuelidate} from '@vuelidate/core';
 import {required} from '@vuelidate/validators';
 
@@ -66,10 +67,10 @@ export default {
       if (this.v$.$error) {
         console.log(this.v$);
       } else {
-        axios.post('http://localhost:1031/api/update-car', this.car)
+        axios.post(`${requestUrl}/api/update-car`, this.car)
             .then(res => {
               this.$router.push({name: 'cars'})
-              this.$store.commit('setNotification', 'Заявка обновлена')
+              this.$store.commit('setNotification', {text: 'Заявка обновлена', type: 'success'})
               this.$store.dispatch('clearNotification')
             })
       }

@@ -22,6 +22,7 @@
 
 <script>
 import axios from "axios";
+import {requestUrl} from "../../store/actions";
 
 export default {
   name: 'Profile',
@@ -35,16 +36,16 @@ export default {
   },
   methods: {
     getUser() {
-      axios.get('http://localhost:1031/api/get-user')
+      axios.get(`${requestUrl}/api/get-user`)
           .then(res => {
             this.user = res.data
           })
     },
     updateUser() {
-      axios.post('http://localhost:1031/api/update-user', this.user)
+      axios.post(`${requestUrl}/api/update-user`, this.user)
           .then(res => {
             this.$router.push({ name: 'profile'})
-            this.$store.commit('setNotification', 'Профиль обновлён')
+            this.$store.commit('setNotification', {text: 'Личные данные обновлены', type: 'success'})
             this.$store.dispatch('clearNotification')
           })
     },

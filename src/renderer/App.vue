@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" mode="out-in">
-    <div class="notification" v-if="notification">{{ notification }}</div>
+    <div class="notification" v-if="notification.text" :class="notification.type">{{ notification.text }}</div>
   </transition>
   <transition name="fade" mode="out-in">
     <div class="loader" v-if="loading"><div class="item"></div></div>
@@ -28,7 +28,7 @@
       <button @click="close" class="close-btn">{{ closeBtnTitle }}</button>
       <router-view v-slot="{ Component, route }">
         <transition name="fade" mode="out-in">
-          <div :key="route.name">
+          <div :key="route.name" style="height: 100%">
             <component :is="Component"></component>
           </div>
         </transition>

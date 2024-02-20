@@ -55,10 +55,16 @@ body{
       right: 20px;
       top: 20px;
       z-index: 99;
-      border: 1px solid green;
       padding: 30px;
       border-radius: 20px;
-      background: #9cd09c;
+      &.success {
+        border: 1px solid green;
+        background: #9cd09c;
+      }
+      &.danger{
+        border: 1px solid red;
+        background: #d09c9c;
+      }
     }
     .content-container{
       border-radius: 20px;

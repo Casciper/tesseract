@@ -22,6 +22,7 @@
 
 <script>
 import axios from "axios";
+import {requestUrl} from "../../store/actions";
 
 export default {
   name: 'userEdit',
@@ -36,17 +37,19 @@ export default {
   },
   methods: {
     updateUser() {
-      axios.post('http://localhost:1031/api/update-user', this.user)
+      axios.post(`${requestUrl}/api/update-user`, this.user)
           .then(res => {
-            console.log(res)
             this.$router.push({ name: 'users'})
+            this.$store.commit('setNotification', {text: 'Работник обновлён', type: 'success'})
+            this.$store.dispatch('clearNotification')
           })
     },
     removeUser() {
-      axios.post('http://localhost:1031/api/remove-user', this.user)
+      axios.post(`${requestUrl}/api/remove-user`, this.user)
           .then(res => {
-            console.log(res)
             this.$router.push({ name: 'users'})
+            this.$store.commit('setNotification', {text: 'Работник удалён', type: 'success'})
+            this.$store.dispatch('clearNotification')
           })
     }
   }

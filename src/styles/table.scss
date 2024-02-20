@@ -1,5 +1,7 @@
 .table-container{
   overflow-x: auto;
+  position: relative;
+  height: calc(100% - 78px);
   .table{
     width: 100%;
     min-width: 500px;

@@ -69,6 +69,7 @@
 
 <script>
 import axios from "axios";
+import {requestUrl} from "../../store/actions";
 
 export default {
   name: 'Cars',
@@ -82,7 +83,7 @@ export default {
   },
   methods: {
     getCars() {
-      axios.get('http://localhost:1031/api/get-cars')
+      axios.get(`${requestUrl}/api/get-cars`)
         .then(response => {
           this.cars = response.data.cars
         })

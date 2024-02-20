@@ -3,10 +3,14 @@
     <h1>Список работников</h1>
     <router-link :to="{ name: 'user-create' }">Создать</router-link>
   </div>
-
-  <div class="table-container" v-if="users && users.length > 0">
+  <div class="table-container">
+    <transition name="fade" mode="out-in">
+      <div v-if="loading" class="loader content-side">
+        <div class="item"></div>
+      </div>
+    </transition>
     <table class="table">
-      <thead>
+      <thead v-if="users && users.length > 0">
       <tr>
         <th>
           <div>
@@ -40,7 +44,7 @@
       </tr>
       </thead>
 
-      <tbody>
+      <tbody v-if="users && users.length > 0">
       <tr v-for="user in users" :key="user.id">
         <td>
           <div>
@@ -69,36 +73,44 @@
         </td>
         <td>
           <div>
-            <router-link @click="storeUser(user.id)" :to="{ name: 'user-edit', params: { id: user.id }}">Редактировать</router-link>
+            <router-link @click="storeUser(user.id)" :to="{ name: 'user-edit', params: { id: user.id }}">Редактировать
+            </router-link>
           </div>
         </td>
       </tr>
       </tbody>
+      <tbody v-else>
+        Список работников пуст
+      </tbody>
     </table>
-  </div>
-  <div v-else>
-    Список работников пуст
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import {requestUrl} from "../../store/actions";
 
 export default {
   name: 'Users',
   data() {
     return {
-      users: {}
+      users: {},
+      loading: true,
     }
   },
   mounted() {
+    console.log(this.users)
     this.getUsers()
   },
   methods: {
     getUsers() {
-      axios.get('http://localhost:1031/api/get-users')
+
+      axios.get(`${requestUrl}/api/get-users`)
           .then(res => {
             this.users = res.data.users
+          })
+          .finally(() => {
+            this.loading = false
           })
     },
     storeUser(id) {

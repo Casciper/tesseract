@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const requestUrl = 'http://localhost:1031';
+export const requestUrl = 'http://localhost:1031';
+// const requestUrl = 'https://alxom.ru';
 
 const setHeaders = () => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.token}`
@@ -12,7 +13,7 @@ const removeHeaders = () => {
 
 const clearNotification = ({commit, dispatch}) => {
     setTimeout(() => {
-        commit('setNotification', null);
+        commit('setNotification', {text: null, type: null});
     }, 2000);
 }
 

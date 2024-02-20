@@ -25,6 +25,7 @@
 
 <script>
 import axios from "axios";
+import {requestUrl} from "../../store/actions";
 
 export default {
   name: 'userCreate',
@@ -35,10 +36,11 @@ export default {
   },
   methods: {
     createUser() {
-      axios.post('http://localhost:1031/api/create-user', this.user)
+      axios.post(`${requestUrl}/api/create-user`, this.user)
           .then(res => {
-            console.log(res)
             this.$router.push({ name: 'users'})
+            this.$store.commit('setNotification', {text: 'Работник создан', type: 'success'})
+            this.$store.dispatch('clearNotification')
           })
     }
   }
