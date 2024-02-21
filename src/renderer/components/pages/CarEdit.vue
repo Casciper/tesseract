@@ -15,24 +15,30 @@
       <span>Время</span>
       <input disabled required v-model="car.time"/>
     </label>
+    <div>
+    </div>
     <label>
       <span>Марка</span>
-      <input :disabled="car.isSaved" required v-model="car.brand"/>
+      <multiselect ref="multiselect" :hide-selected="true" :closeOnSelect="true" :disabled="!car.isSaved" v-model="car.brand" label="name"
+                   track-by="id"
+                   :options="brands" :multiple="false" @select="close"></multiselect>
       <span class="input-error-text">{{ v$ && v$.car.brand.$errors[0]?.$message }}</span>
     </label>
     <label>
       <span>Услуга</span>
-      <input :disabled="car.isSaved" required v-model="car.service"/>
+      <multiselect :disabled="!car.isSaved" :hide-selected="true" v-model="car.service" tag-placeholder="Add this as new tag"
+                   placeholder="Search or add a tag" label="name" track-by="id" :options="services"
+                   :multiple="true"></multiselect>
       <span class="input-error-text">{{ v$ && v$.car.service.$errors[0]?.$message }}</span>
     </label>
     <label>
       <span>Скидка</span>
-      <input :disabled="car.isSaved" required v-model="car.salary"/>
+      <input :disabled="!car.isSaved" required v-model="car.salary"/>
       <span class="input-error-text">{{ v$ && v$.car.salary.$errors[0]?.$message }}</span>
     </label>
     <label>
       <span>Оплата</span>
-      <input :disabled="car.isSaved" required v-model="car.payment"/>
+      <input :disabled="!car.isSaved" required v-model="car.payment"/>
       <span class="input-error-text">{{ v$ && v$.car.payment.$errors[0]?.$message }}</span>
     </label>
     <label>
@@ -45,15 +51,25 @@
 
 <script>
 import axios from "axios";
-import { requestUrl } from '../../store/actions';
+import {requestUrl} from '../../store/actions';
 import {useVuelidate} from '@vuelidate/core';
-import {required} from '@vuelidate/validators';
+import {numeric, required} from '@vuelidate/validators';
 
 export default {
   name: 'CarsEdit',
   data() {
     return {
       v$: useVuelidate(),
+      services: [
+        {name: 'Мойка', id: 1},
+        {name: 'Чистка', id: 2},
+        {name: 'Сушка', id: 3}
+      ],
+      brands: [
+        {name: 'Audi', id: 1},
+        {name: 'BMW', id: 2},
+        {name: 'Toyota', id: 3}
+      ],
     }
   },
   computed: {
@@ -62,6 +78,11 @@ export default {
     }
   },
   methods: {
+    close() {
+      setTimeout(() => {
+        this.$refs.multiselect.deactivate()
+      }, 10)
+    },
     setCar() {
       this.v$.$validate();
       if (this.v$.$error) {
@@ -75,15 +96,29 @@ export default {
             })
       }
     }
-  },
+  }
+  ,
   validations: {
     car: {
-      brand: {required},
-      service: {required},
-      salary: {required},
-      payment: {required},
+      brand: {
+        required
+      }
+      ,
+      service: {
+        required
+      }
+      ,
+      salary: {
+        required
+      }
+      ,
+      payment: {
+        numeric, required
+      }
+      ,
     }
-  },
+  }
+  ,
 }
 </script>
 

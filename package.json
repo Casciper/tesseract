@@ -24,7 +24,8 @@
     "electron-builder": "^24.2.1",
     "sass": "^1.70.0",
     "typescript": "^5.2.2",
-    "vite": "^4.5.0"
+    "vite": "^4.5.0",
+    "vue-select": "^4.0.0-beta.6"
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.3",
@@ -32,6 +33,7 @@
     "axios": "^1.6.7",
     "vue": "^3.3.8",
     "vue-good-table-next": "^0.2.1",
+    "vue-multiselect": "^3.0.0-beta.3",
     "vue-router": "^4.2.5",
     "vuelidate": "^0.7.7",
     "vuex": "^4.1.0"
