@@ -42,7 +42,7 @@
       </thead>
 
       <tbody v-if="cars">
-      <tr v-for="car in cars" :key="car.id" :class="!car.isSaved ? 'new' : ''">
+      <tr v-for="car in cars" :key="car.id" :class="!car.is_saved ? 'new' : ''">
         <td>
           <div>
             {{ car.id }}

@@ -26,19 +26,19 @@
     </label>
     <label>
       <span>Услуга</span>
-      <multiselect :disabled="!car.isSaved" :hide-selected="true" v-model="car.service" tag-placeholder="Add this as new tag"
+      <multiselect :disabled="!car.is_saved" :hide-selected="true" v-model="car.service" tag-placeholder="Add this as new tag"
                    placeholder="Search or add a tag" label="name" track-by="id" :options="services"
                    :multiple="true"></multiselect>
       <span class="input-error-text">{{ v$ && v$.car.service.$errors[0]?.$message }}</span>
     </label>
     <label>
       <span>Скидка</span>
-      <input :disabled="!car.isSaved" required v-model="car.salary"/>
+      <input :disabled="!car.is_saved" required v-model="car.salary"/>
       <span class="input-error-text">{{ v$ && v$.car.salary.$errors[0]?.$message }}</span>
     </label>
     <label>
       <span>Оплата</span>
-      <input :disabled="!car.isSaved" required v-model="car.payment"/>
+      <input :disabled="!car.is_saved" required v-model="car.payment"/>
       <span class="input-error-text">{{ v$ && v$.car.payment.$errors[0]?.$message }}</span>
     </label>
     <label>
