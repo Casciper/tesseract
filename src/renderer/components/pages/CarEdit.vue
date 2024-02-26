@@ -19,15 +19,14 @@
     </div>
     <label>
       <span>Марка</span>
-      <multiselect ref="multiselect" :hide-selected="true" :closeOnSelect="true" :disabled="!car.isSaved" v-model="car.brand" label="name"
-                   track-by="id"
+      <multiselect ref="multiselect" :hide-selected="true" :closeOnSelect="true" :disabled="!car.is_saved" v-model="car.brand"
                    :options="brands" :multiple="false" @select="close"></multiselect>
       <span class="input-error-text">{{ v$ && v$.car.brand.$errors[0]?.$message }}</span>
     </label>
     <label>
       <span>Услуга</span>
       <multiselect :disabled="!car.is_saved" :hide-selected="true" v-model="car.service" tag-placeholder="Add this as new tag"
-                   placeholder="Search or add a tag" label="name" track-by="id" :options="services"
+                   placeholder="Search or add a tag" :options="services"
                    :multiple="true"></multiselect>
       <span class="input-error-text">{{ v$ && v$.car.service.$errors[0]?.$message }}</span>
     </label>
@@ -60,16 +59,8 @@ export default {
   data() {
     return {
       v$: useVuelidate(),
-      services: [
-        {name: 'Мойка', id: 1},
-        {name: 'Чистка', id: 2},
-        {name: 'Сушка', id: 3}
-      ],
-      brands: [
-        {name: 'Audi', id: 1},
-        {name: 'BMW', id: 2},
-        {name: 'Toyota', id: 3}
-      ],
+      services: ['Мойка', 'Чистка', 'Сушка'],
+      brands: ['Audi', 'BMW', 'Toyota'],
     }
   },
   computed: {

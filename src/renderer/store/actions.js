@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const requestUrl = 'http://localhost:1031';
-// const requestUrl = 'https://alxom.ru';
+// export const requestUrl = 'https://alxom.ru';
 
 const setHeaders = () => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.token}`
